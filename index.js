@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 
     schedulesForWeeks.push(schedulesForWeek);
   }
-  res.render("index.ejs", { schedules: schedulesForWeeks.flat(), deadlinesData: dl, reverseDateFormat, addOneDay });
+  res.render("tt.ejs", { schedules: schedulesForWeeks.flat(), deadlinesData: dl, reverseDateFormat, addOneDay });
 });
 
 // Ваш маршрут
