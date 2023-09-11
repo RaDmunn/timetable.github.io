@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>timetable</title>
+</head>
+<body>
+    <a href="/" class="aaa backbutton">Ha головну</a>
+    <div class="deadline">
+        <h1>Список дедлайнів</h1>
+        <form id="deadlineForm" action="/addDeadline" method="post">
+            <label for="subject">Назва предмету:</label>
+            <select type="text" id="subjectForDl" name="subjectForDl">
+                <option value="Теорія інформації та кодування Мирутенко (Пр)">Теорія інформації та кодування Мирутенко (Пр)</option>
+                <option value="Теорія інформації та кодування Мирутенко (Лаб)">Теорія інформації та кодування Мирутенко (Лаб)</option>
+                <option value="Захист електронного документообігу Богуславська (Пр)">Захист електронного документообігу Богуславська (Пр)</option>
+                <option value="Філософія Білоус (Семінар)">Філософія Білоус (Семінар)</option>
+                <option value="Інформаційні системи та мережі Бабенко (Пр)">Інформаційні системи та мережі Бабенко (Пр)</option>
+                <option value="Інформаційні системи та мережі Даков (Лаб)">Інформаційні системи та мережі Даков (лаб)</option>
+                <option value="Технології виявлення шкідливого коду Бучик (Пр)">Технології виявлення шкідливого коду Бучик (Пр)</option>                
+            </select>
+            
+            <label for="task">Завдання/примітки:</label>
+            <input type="text" id="taskForDl" name="taskForDl" required>
+
+            <label for="group">Підгрупа:</label>
+            <select type="text" id="groupForDl" name="groupForDl" required>
+                <option value="1">1</option>
+                <option value="2">2</option>               
+            </select>
+
+            <label for="date">Дата (дд/мм):</label>
+            <form class="uk-form">
+                <input type="text" id="dateForDl" name="dateForDl" data-uk-datepicker="{format:'DD.MM.YYYY'}">
+
+            <p>
+                <button type="submit" id="addButton">Додати</button>
+            </p> 
+
+        </form>
+    </div>
+    
+    <div class="gridDl">
+        
+            
+        <ul id="deadlineList">
+            <h3>1 підгрупа</h3>
+            <% for (let i = 0; i < deadlinesData.length; i++) { %>
+            <% const deadline = deadlinesData[i]; %>
+            <% if (deadline.group === "1") { %>
+            <li class="class dltext">
+                <strong>Предмет:</strong> <%= deadline.subject %>
+                <strong>Завдання:</strong> <%= deadline.task %> 
+                <strong>Дедлайн:</strong> <%= deadline.dates %>     
+                <form class="delete-form" action="/delete/<%= i %>" method="post">
+                <button class="btn-delete" type="submit">Delete</button>
+            </form> 
+            </li>
+        <% } %>
+        <% } %>
+      </ul>
+    
+      
+        <ul id="deadlineList">
+            <h3>2 підгрупа</h3>
+            <% for (let i = 0; i < deadlinesData.length; i++) { %>
+            <% const deadline = deadlinesData[i]; %>
+            <% if (deadline.group === "2") { %>
+            <li class="class dltext">
+              <strong>Предмет:</strong> <%= deadline.subject %>
+              <strong>Завдання:</strong> <%= deadline.task %> 
+              <strong>Дедлайн:</strong> <%= deadline.dates %>   
+              <form class="delete-form" action="/delete/<%= i %>" method="post">
+                <button class="btn-delete" type="submit">Delete</button>
+              </form>   
+            </li>
+          <% } %>
+        <% } %>
+      </ul>
+    </div>
+</body>
+</html>

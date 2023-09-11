@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>timetable</title>
+</head>
+
+<body>
+  <div class="top">
+    <p class="logocont"><img src="/logo.jpg" alt="ttlogo" class="logo"> timetable</p>
+    <p class="textheader">
+      <a href="dl" class="aaa">Дедлайни</a>
+    </p>
+  </div>
+  <form action="/" method="get" class="weekSelector">
+    <label for="weeks">Оберіть кількість тижнів:</label>
+    <select id="weeks" name="weeks">
+      <option value="1">1 тиждень</option>
+      <option value="2">2 тижня</option>
+      <option value="3">3 тижня</option>
+      <option value="4">4 тижня</option>
+    </select>
+    <button type="submit">Показати</button>
+  </form>
+  <main class="weekGrid">
+    <% for (const scheduleData of schedules) { %>
+
+      <div class="Day <%= scheduleData.schedule.day %> ">
+
+        <h2>
+          <%= scheduleData.schedule.day %>  <%= scheduleData.currentDateFormatted %>
+        </h2>
+        <div class="subjects">
+          <% let currentDateFormatted=scheduleData.currentDateFormatted; %>
+            <% for (const classInfo of scheduleData.schedule.classes) { %>
+                  <% if (classInfo.dates.includes("always") || classInfo.dates.includes(currentDateFormatted)) { %>
+                    <div class="class">
+                      <p class="time">
+                        <%= classInfo.time %>
+                      </p>
+                      <p class="subject">
+                        <a class="aaa" href="<%=classInfo.link%>" target="_blank">
+                          <%= classInfo.subject %>
+                        </a>
+                      </p>
+                      <!-- <p>
+                        <%= classInfo.dates %>
+                      </p> -->
+                    </div>
+                    <% } %>
+                      <% } %>
+                        <% if (!isNaN(Date.parse(currentDateFormatted))) {
+                          currentDateFormatted=addOneDay(currentDateFormatted); } %>
+        </div>
+      </div>
+
+      <% } %>
+        
+  </main>
+  
+</body>
+
+</html>

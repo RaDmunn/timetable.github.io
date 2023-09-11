@@ -1,0 +1,162 @@
+
+body{
+    background-color: rgb(240, 241, 238);
+}
+
+h2{
+    text-align: center;
+    border: 2px solid rgb(231, 134, 69);
+    border-radius: 10px;
+    background-color: rgb(240, 240, 240);
+}
+
+.textheader{
+    font-size: 25px;
+    margin-top: 7px;
+}
+
+.backbutton{
+    background-color: #d39987;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 25px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.logocont{
+    color: rgb(88, 85, 81);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+}
+
+.logocont > img{
+    width: 15%;
+    height: auto;
+    float: left;
+    margin: 10px 10px;
+    border-radius: 20px;
+}
+
+.top{
+    display: flex;
+    align-items: center;
+}
+
+.weekGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Создает 7 равных колонок */
+    gap: 60px;
+    justify-content: center;
+    height: 700px;
+    margin: 0 auto; /* Центрируем сетку */
+    padding: 20px;
+}
+
+.Day{
+    border-radius: 25px;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+.class{ 
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;  
+    border: 5px solid rgb(231, 134, 69);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); /* Эффект тени */
+    margin: 4px;
+}
+
+.time{
+    padding-bottom: 10px;
+    border-bottom: 5px solid rgb(231, 134, 69);
+}
+
+.subject{
+    padding-bottom: 10px;
+}
+
+.weekSelector {
+        background-color: rgb(231, 134, 69);
+        padding: 10px;
+        border-radius: 25px;
+    }
+
+    .weekSelector form {
+        display: flex;
+        align-items: center;    
+    }
+
+    .weekSelector label,
+    .weekSelector select,
+    .weekSelector button {
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .weekSelector select {
+        width: 100px;
+}
+
+.aaa {
+    color: rgb(61, 48, 22); /* Цвет текста ссылки */
+    text-decoration: none; /* Убрать подчеркивание */
+    transition: color 0.3s ease-in-out; /* Плавное изменение цвета при наведении */
+}
+  
+.aaa:hover {
+    color: darkorange; /* Цвет текста ссылки при наведении */
+}
+
+.deadline {
+        border-radius: 18px;
+        bottom: 0;
+        left: 0;
+        margin: 20px;
+        padding: 10px;
+        background-color: #ff7c55;
+    }
+    
+    .deadline h3 {
+        margin-bottom: 5px;
+    }
+    
+    .deadline ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    
+    .deadline li {
+        margin-bottom: 10px;
+    }
+    
+    .deadline p {
+        margin: 0;
+}
+
+.gridDl{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; /* Відстань між елементами */
+    list-style: none; /* Позбутися маркерів списку */
+    padding: 0;
+    
+    }
+
+    .gridDl ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .dltext{
+        padding: 15px;
+        margin: 10px;
+        
+}
+
+
