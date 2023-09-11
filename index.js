@@ -15,6 +15,7 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const port = 3000;
+app.set('views', path.join(__dirname, 'docs'));
 app.set('view engine', 'ejs')
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -62,8 +63,6 @@ app.get("/dl", (req, res) => {
   }
   res.render("dl", { deadlinesData: dl, parseDate });
 });
-
-
 
 function sortDataAndWriteToFile(filePath) {
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -165,28 +164,3 @@ app.post('/delete/:index', (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-// app.get("/", (req, res) => {
-//   const currentDate = new Date();
-//   const nearestMonday = getNearestMonday(currentDate);
-
-//   const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  
-//   const schedulesForWeek = daysOfWeek.map(day => {
-//     const scheduleForCurrentDay = items.find(item => item.day === day);
-
-//     const currentDateForDay = new Date(nearestMonday);
-//     currentDateForDay.setDate(nearestMonday.getDate() + daysOfWeek.indexOf(day));
-
-//     const currentDateFormatted = currentDateForDay.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit' });
-
-//     scheduleForCurrentDay.classes = scheduleForCurrentDay.classes.filter(classInfo => {
-//       return classInfo.dates.includes("always") || classInfo.dates.some(date => date === currentDateFormatted || reverseDateFormat(date) === currentDateFormatted);
-//     });
-
-//     const currentDateFormattedReversed = reverseDateFormat(currentDateFormatted);
-//     return { day, schedule: scheduleForCurrentDay, currentDateFormatted: currentDateFormattedReversed };
-//   });
-
-//   res.render("index.ejs", { schedules: schedulesForWeek, reverseDateFormat, addOneDay});
-// });
