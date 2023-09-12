@@ -41,10 +41,10 @@ export function addOneDay(dateString) {
     return `${newDay.toString().padStart(2, '0')}/${newMonth.toString().padStart(2, '0')}`;
   }
 
-export  function getNearestMonday(date) {
+  export function getNearestMonday(date) {
     const day = date.getDay();
-    const daysUntilMonday = day === 1 ? 0 : day === 0 ? 1 : 8 - day;
+    const daysUntilMonday = day === 1 ? 0 : day === 0 ? 6 : day - 1;
     const nearestMonday = new Date(date);
-    nearestMonday.setDate(date.getDate() + daysUntilMonday);
+    nearestMonday.setDate(date.getDate() - daysUntilMonday);
     return nearestMonday;
-}
+  }
