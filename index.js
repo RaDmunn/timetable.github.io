@@ -6,6 +6,7 @@ import path from"path";
 import { reverseDateFormat } from './dateUtils.js';
 import { addOneDay } from './dateUtils.js';
 import { getNearestMonday } from './dateUtils.js';
+import {sortDataAndWriteToFile} from './dateUtils.js';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -16,13 +17,17 @@ const __dirname = dirname(__filename);
 const app = express();
 const port = 3000;
 app.set('views', path.join(__dirname, 'docs'));
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let items = JSON.parse(fs.readFileSync("data/items.json", "utf8"));
 
 app.get("/", (req, res) => {
+  res.render("index")
+});
+
+app.get("/timetable", (req, res) => {
   const currentDate = new Date();
   const nearestMonday = getNearestMonday(currentDate);
   const weeksToShow = parseInt(req.query.weeks) || 1; // По умолчанию 1 неделя
@@ -51,7 +56,7 @@ app.get("/", (req, res) => {
 
     schedulesForWeeks.push(schedulesForWeek);
   }
-  res.render("index.ejs", { schedules: schedulesForWeeks.flat(), deadlinesData: dl, reverseDateFormat, addOneDay });
+  res.render("timetable.ejs", { schedules: schedulesForWeeks.flat(), deadlinesData: dl, reverseDateFormat, addOneDay });
 });
 
 // Ваш маршрут
@@ -63,35 +68,6 @@ app.get("/dl", (req, res) => {
   }
   res.render("dl", { deadlinesData: dl, parseDate });
 });
-
-function sortDataAndWriteToFile(filePath) {
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Ошибка при чтении файла:', err);
-      return;
-    }
-
-    try {
-      const jsonData = JSON.parse(data);
-
-      jsonData.sort((a, b) => {
-        const dateA = new Date(`${a.dates.slice(3, 5)}/${a.dates.slice(0, 2)}/2023`);
-        const dateB = new Date(`${b.dates.slice(3, 5)}/${b.dates.slice(0, 2)}/2023`);
-        return dateA - dateB;
-      });
-
-      fs.writeFile(filePath, JSON.stringify(jsonData, null, 4), 'utf8', (writeErr) => {
-        if (writeErr) {
-          console.error('Ошибка при записи файла:', writeErr);
-          return;
-        }
-        console.log(`Данные успешно отсортированы и записаны в файл ${filePath}`);
-      });
-    } catch (parseError) {
-      console.error('Ошибка при парсинге JSON:', parseError);
-    }
-  });
-}
 
 app.post('/addDeadline', (req, res) => {
   const subject = req.body.subjectForDl;

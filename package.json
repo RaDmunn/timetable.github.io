@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "build": "webpack --mode production" 
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
